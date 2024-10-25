@@ -75,11 +75,12 @@ if True:
     alphabet = Alphabet.from_architecture(model_args.arch)
     terms = list(pd.read_pickle(tag_ + model_args.terms_pkl))
     alphabet_go = Alphabet_goclean(terms)
-
+    
     input_dir = sys.argv[1]
     out_model = tag_ + f'trained.model'
     out_dir = f'{input_dir}'
-    out_file = f'{out_dir}/prediction.txt'
+    input_dir_name = os.path.basename(os.path.normpath(input_dir))
+    out_file = f'{out_dir}/{input_dir_name}_prediction.txt'
     
     prediction_go_mask = np.array(['GO' in tok for tok in alphabet_go.all_toks])
     
